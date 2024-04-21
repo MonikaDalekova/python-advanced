@@ -1,0 +1,8 @@
+sequence = tuple([float(x) for x in input().split()])
+occ = {}
+for el in sequence:
+    if el not in occ:
+        occ[el] = 0
+    occ[el] += 1
+for el, count in occ.items():
+    print(f"{el} - {count} times")
