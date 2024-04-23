@@ -1,0 +1,45 @@
+def add_first(a, b): # a = command, b = first_sequence
+    numbers = {int(x) for x in a[2::]}
+    b = b.union(numbers)
+    return b
+
+
+def add_second(a, c): # a = command, c = second_sequence
+    numbers = {int(x) for x in a[2::]}
+    c = c.union(numbers)
+    return c
+
+
+def remove_first(a, b): # a = command, b = first_sequence
+    numbers = {int(x) for x in a[2::]}
+    b = b.difference(numbers)
+    return b
+
+
+def remove_second(a, c): # a = command, c = second_sequence
+    numbers = {int(x) for x in a[2::]}
+    c = c.difference(numbers)
+    return c
+
+
+def check(b, c):
+    print(c.issubset(b))
+
+
+first_sequence = {int(x) for x in input().split()}
+second_sequence = {int(x) for x in input().split()}
+n = int(input())
+for _ in range(n):
+    command = input().split()
+    if command[0] == "Add" and command[1] == "First":
+        first_sequence = add_first(command, first_sequence)
+    elif command[0] == "Add" and command[1] == "Second":
+        second_sequence = add_second(command, second_sequence)
+    elif command[0] == "Remove" and command[1] == "First":
+        first_sequence = remove_first(command, first_sequence)
+    elif command[0] == "Remove" and command[1] == "Second":
+        second_sequence = remove_second(command, second_sequence)
+    elif command[0] == "Check":
+        check(first_sequence, second_sequence)
+print(*(sorted(first_sequence)), sep=", ")
+print(*(sorted(second_sequence)), sep=", ")
