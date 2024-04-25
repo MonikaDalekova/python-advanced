@@ -5,11 +5,7 @@ sum_total = 0
 for _ in range(rows):
     inner_list = [int(el) for el in input().split(", ")]
     matrix.append(inner_list)
-    # current_sum = sum(inner_list)
-    # sum_total += current_sum
-    for row_index in range(rows):
-        for col_index in range(cols):
-            # sum_total += cols[col_index]
-            sum_total += matrix[row_index][col_index]
+    sum_total += sum(inner_list)
+
 print(sum_total)
 print(matrix)
