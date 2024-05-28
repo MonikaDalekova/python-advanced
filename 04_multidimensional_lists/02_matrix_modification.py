@@ -34,3 +34,26 @@ while True:
 
 for row in matrix:
     print(*row, sep=' ')
+
+#2
+rows = int(input())
+matrix = [[int(x) for x in input().split()] for el in range(rows)]
+
+valid_range = range(0, rows - 1)
+
+command = input()
+while command != "END":
+    action, row, col, value = [int(x) if x.isdigit() else x for x in command.split()]
+    if action == 'Add':
+        if row in valid_range and col in valid_range:
+            matrix[row][col] += value
+        else:
+            print("Invalid coordinates")
+    elif action == "Subtract":
+        if row in valid_range and col in valid_range:
+            matrix[row][col] -= value
+        else:
+            print("Invalid coordinates")
+    command = input()
+
+[print(*row, sep=' ') for row in matrix]
