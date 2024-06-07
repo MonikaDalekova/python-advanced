@@ -1,0 +1,32 @@
+from collections import deque
+
+contestants = deque(int(x) for x in input().split())
+pies_pieces = [int(x) for x in input().split()] # stack
+
+while contestants and pies_pieces:
+    current_contestant = contestants.popleft()
+    current_pie = pies_pieces.pop()
+    if current_contestant >= current_pie:
+        current_contestant -= current_pie
+        if current_contestant > 0:
+            contestants.append(current_contestant)
+    elif current_pie > current_contestant:
+        current_pie -= current_contestant
+        pies_pieces.append(current_pie)
+        if current_pie == 1:
+            if len(pies_pieces) > 1:
+                current_pie = pies_pieces.pop()
+                pies_pieces[-1] += current_pie
+            elif len(pies_pieces) == 0:
+                pies_pieces.append(current_pie)
+
+if len(pies_pieces) == 0 and len(contestants) > 0:
+    print("We will have to wait for more pies to be baked!")
+    print(f"Contestants left: ", end='')
+    print(*contestants, sep=', ')
+elif len(pies_pieces) == 0 and len(contestants) == 0:
+    print("We have a champion!")
+elif len(contestants) == 0 and len(pies_pieces) > 0:
+    print("Our contestants need to rest!")
+    print(f"Pies left: ", end='')
+    print(*pies_pieces, sep=', ')
